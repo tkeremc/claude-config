@@ -1,0 +1,14 @@
+# Allowlist: ignore everything, then un-ignore only the shareable configuration.
+# Credentials, conversation history, caches and machine-specific files stay out.
+/*
+!/.gitignore
+!/README.md
+!/install.sh
+!/CLAUDE.md
+!/settings.json
+!/statusline.sh
+!/agents/
+!/hooks/
+!/skills/
+/skills/*
+!/skills/usage-limit/
