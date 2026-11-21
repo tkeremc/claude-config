@@ -2,7 +2,7 @@
 name: backend-light
 description: .NET developer for contained backend API work that follows an existing pattern, such as an endpoint, DTO, or manager change.
 model: sonnet
-effort: high
+effort: medium
 disallowedTools: Agent
 hooks:
   PreToolUse:

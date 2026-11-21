@@ -2,7 +2,7 @@
 name: frontend-light
 description: Angular developer for contained frontend work that follows an existing pattern, such as a single page, form, or component change.
 model: sonnet
-effort: high
+effort: medium
 disallowedTools: Agent
 hooks:
   PreToolUse:

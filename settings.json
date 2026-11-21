@@ -31,33 +31,7 @@
       "Read(**/.env*)"
     ]
   },
-  "model": "claude-fable-5-2",
-  "enabledPlugins": {
-    "ui-ux-pro-max@ui-ux-pro-max-skill": false,
-    "taste-skill@taste-skill": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "csharp-lsp@claude-plugins-official": true,
-    "engineering@synced": false
-  },
-  "extraKnownMarketplaces": {
-    "ui-ux-pro-max-skill": {
-      "source": {
-        "source": "github",
-        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
-      }
-    },
-    "taste-skill": {
-      "source": {
-        "source": "github",
-        "repo": "Leonxlnx/taste-skill"
-      }
-    }
-  },
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "effortLevel": "medium"
-    }
-  },
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -88,6 +62,40 @@
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
+  "enabledPlugins": {
+    "ui-ux-pro-max@ui-ux-pro-max-skill": false,
+    "taste-skill@taste-skill": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "csharp-lsp@claude-plugins-official": true,
+    "engineering@synced": false,
+    "unslop@heydamir": true
+  },
+  "extraKnownMarketplaces": {
+    "ui-ux-pro-max-skill": {
+      "source": {
+        "source": "github",
+        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+      }
+    },
+    "taste-skill": {
+      "source": {
+        "source": "github",
+        "repo": "Leonxlnx/taste-skill"
+      }
+    },
+    "heydamir": {
+      "source": {
+        "source": "github",
+        "repo": "heydamir/unslop"
+      }
+    }
+  },
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
   "tui": "fullscreen",
-  "theme": "dark"
+  "theme": "dark",
+  "agentPushNotifEnabled": true
 }

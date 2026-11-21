@@ -38,6 +38,18 @@ Ajanların işi kod yazmak, çıkan işi gözle kontrol etmek senin işin; kulla
 - **Ölçü:** Her ekran görüntüsü bağlamını doldurur. Yalnızca işin dokunduğu ekran ve durumların görüntüsünü al.
 - **Rapor:** Hangi ekrana ve hangi durumlara baktığını, neye bakamadığını kullanıcıya söyle.
 
+## Proje vault'u
+
+Vault: `~/Projects/_brain` (Obsidian). Bir projenin vault'u olduğunu gösteren tek işaret, reponun `CLAUDE.md` dosyasında `_brain` yolunun geçmesidir.
+
+- **Vault'u yoksa:** Vault'tan hiç söz etme, açmayı teklif etme, ADR veya log önerme. Eski projeler bilerek vault'suz kalıyor.
+- **Vault'u varsa:**
+  - İşe başlamadan önce proje sayfasını ve ilgili ADR'leri oku. Ajana iş verirken ilgili dosyaların yolunu görev tanımına yaz.
+  - Vault'a yalnızca sen yazarsın. Görev tanımında ajanlara vault'a yazmamalarını söyle.
+  - Geri alınması zor ve gerçekten birden fazla seçeneği olan bir karar çıkarsa `Templates/adr.md` şablonundan `status: proposed` olarak ADR taslağı yaz. Kullanıcı onaylayınca durumu `accepted` yap. Kabul edilmiş bir ADR'yi değiştirme; karar değişirse yeni bir ADR yaz.
+  - Anlamlı bir iş tamamlandığında `Log/YYYY-MM-DD.md` dosyasına ne yapıldığını ve neyin açık kaldığını kısaca ekle. Her küçük iş için log yazma.
+  - Dosyaları doğrudan oku ve yaz. Obsidian MCP yalnızca vault içinde arama yapmak için gerekir; bağlı değilse dosya araçlarıyla devam et.
+
 ## Ajan seçimi
 
 | İş | Ajan |
@@ -49,13 +61,16 @@ Ajanların işi kod yazmak, çıkan işi gözle kontrol etmek senin işin; kulla
 | Birden fazla modüle yayılan frontend işi; NgRx yapısını, auth'u veya çok kullanılan bir shared bileşenin mevcut davranışını değiştiren iş | `frontend-heavy` |
 | Var olan desenle sınırlı backend işi | `backend-light` |
 | Migration, auth, transaction, modüller arası backend işi | `backend-heavy` |
+| Var olan desenle sınırlı Rust işi (Tauri komutu, DTO, tool, adapter metodu) | `rust-light` |
+| Async/actor ve iptal tasarımı, migration, süreç/dosya güvenliği, Git plumbing, yetki politikası, birden fazla crate'e yayılan Rust işi | `rust-heavy` |
 | Detaylı test, nedeni belirsiz hata | `debugger` |
 
-- `frontend-heavy` ve `backend-heavy` gerçekten gerekmedikçe çalıştırılmaz. Varsayılan seçim light ajanlardır; heavy ajan yalnızca iş light ajanın sınırlarını açıkça aşıyorsa veya light ajan işi devrediyorsa çağrılır.
+- `backend-light`/`backend-heavy` .NET repoları içindir; Rust repolarında `rust-light`/`rust-heavy` kullanılır.
+- `frontend-heavy`, `backend-heavy` ve `rust-heavy` gerçekten gerekmedikçe çalıştırılmaz. Varsayılan seçim light ajanlardır; heavy ajan yalnızca iş light ajanın sınırlarını açıkça aşıyorsa veya light ajan işi devrediyorsa çağrılır.
 - Light ile heavy arasındaki ölçüt dokunulan alan değil, işin zorluğudur. Shared bileşene, store'a veya ortak bir manager'a mevcut davranışı değiştirmeyen küçük bir ekleme (isteğe bağlı girdi, yeni alan, yeni seçenek) light ajanın işidir.
 - Birden fazla yaklaşım mümkünse veya iş belirsiz ve büyükse önce `architect`'i çağır.
 - Birkaç dosyayı aşan aramayı kendin yapma, `Explore`'a ver; yalnızca sonucu alırsın, bağlamın dolmaz. `architect` arama için değil, karar ve plan içindir.
-- API sözleşmesi değişiyorsa sıra: backend, `ng-openapi-gen`, frontend. Panelde client üretimini (`npx ng-openapi-gen`) frontend ajanı işe başlarken çalıştırır; bunu görev tanımına yaz. API yerelde çalışmıyorsa ajan üretilmiş dosyaları elle düzenlemez, durup bildirir.
+- API sözleşmesi değişiyorsa sıra: backend, `ng-openapi-gen`, frontend. Panelde client üretimini (`npx ng-openapi-gen`) frontend ajanı işe başlarken çalıştırır; bunu görev tanımına yaz. API yerelde çalışmıyorsa ajan üretilmiş dosyaları elle düzenlemez, durup bildirir. Tauri uygulamalarında (Loom) sıra: Rust komutu/DTO, ts-rs ile TypeScript üretimi, frontend.
 - Auth, yetki, ödeme, dosya yükleme veya veri erişimi değiştiyse işin sonunda `security`'yi çağır.
 - `debugger` yalnızca kullanıcı detaylı test istediğinde veya basit kontrol başarısız olup nedeni belirsiz olduğunda çalışır.
 - Bir ajan işin kendisine büyük geldiğini söylerse önerdiği ajana devret.
